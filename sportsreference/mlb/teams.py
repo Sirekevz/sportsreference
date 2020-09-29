@@ -1203,11 +1203,20 @@ class Teams:
     ----------
     year : string (optional)
         The requested year to pull stats from.
+    standings_file : string (optional)
+        Optionally specify the filename of a local file to use to pull data
+        instead of downloading from sports-reference.com. This file should be
+        of the Standings page for the designated year.
+    teams_file : string (optional)
+        Optionally specify the filename of a local file to use to pull data
+        instead of downloading from sports-reference.com. This file should be
+        of the League page for the designated year.
     """
-    def __init__(self, year=None):
+    def __init__(self, year=None, standings_file=None, teams_file=None):
         self._teams = []
 
-        team_data_dict, year = _retrieve_all_teams(year)
+        team_data_dict, year = _retrieve_all_teams(year, standings_file,
+                                                   teams_file)
         self._instantiate_teams(team_data_dict, year)
 
     def __str__(self):
